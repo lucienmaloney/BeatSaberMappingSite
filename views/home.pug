@@ -1,7 +1,7 @@
 extends base.pug
 
 block title
-  title Automapper
+  title Beat Saber Automapper
 
 block styles
   link(rel="stylesheet", type="text/css" href="/styles/home.css")
@@ -9,7 +9,7 @@ block styles
 block main
   fieldset
     legend Step 1: Select Songs
-    table
+    table#upload
       tr
         td
           label Upload Files:
@@ -23,10 +23,116 @@ block main
         td
           label Paste YouTube URL's:
           br
-          label(class="small") Separate URL's by newlines; Playlist links allowed
+          label.small Separate URL's by newlines; Playlist links allowed
         td
           textarea
   fieldset
     legend Step 2: Create Maps
+    table#mapoptions
+      tr
+        th Standard
+        th One-handed
+        th 90-degree
+        th 360-degree
+      tr
+        td
+          input(type="checkbox", checked)
+          label Easy
+          br
+          input(type="checkbox", checked)
+          label Normal
+          br
+          input(type="checkbox", checked)
+          label Hard
+          br
+          input(type="checkbox", checked)
+          label Expert
+          br
+          input(type="checkbox", checked)
+          label Expert+
+        td
+          input(type="checkbox")
+          label Easy
+          br
+          input(type="checkbox")
+          label Normal
+          br
+          input(type="checkbox")
+          label Hard
+          br
+          input(type="checkbox")
+          label Expert
+          br
+          input(type="checkbox")
+          label Expert+
+        td
+          input(type="checkbox", disabled)
+          label Easy
+          br
+          input(type="checkbox", disabled)
+          label Normal
+          br
+          input(type="checkbox", disabled)
+          label Hard
+          br
+          input(type="checkbox", disabled)
+          label Expert
+          br
+          input(type="checkbox", disabled)
+          label Expert+
+        td
+          input(type="checkbox", disabled)
+          label Easy
+          br
+          input(type="checkbox", disabled)
+          label Normal
+          br
+          input(type="checkbox", disabled)
+          label Hard
+          br
+          input(type="checkbox", disabled)
+          label Expert
+          br
+          input(type="checkbox", disabled)
+          label Expert+
+    label.small#degree 90° and 360° automapping still WIP; watch for updates
+    hr
+    div.flex#mappingoptions
+      div
+        p Environment:
+        input(type="radio", name="environment", checked)
+        label Default
+        br
+        input(type="radio", name="environment")
+        label Big Mirror
+        br
+        input(type="radio", name="environment")
+        label Nice
+        br
+        input(type="radio", name="environment")
+        label Triangle
+        br
+      div
+        p Note Speed:
+        input(type="number", min="5", max="40", value="10")
+        label Easy
+        br
+        input(type="number", min="5", max="40", value="12")
+        label Normal
+        br
+        input(type="number", min="5", max="40", value="15")
+        label Hard
+        br
+        input(type="number", min="5", max="40", value="18")
+        label Expert
+        br
+        input(type="number", min="5", max="40", value="20")
+        label Expert+
+        br
+    hr
+    input(type="button", value="Create Maps")#create
   fieldset
     legend Step 3: Download Maps
+    label Fetching songs
+    progress(value="68", max="100")
+    br

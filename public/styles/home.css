@@ -7,14 +7,36 @@ table, tr {
   width: 100%;
 }
 
-td:first-child {
+table#upload td:first-child {
   text-align: center;
   width: 250px;
 }
 
-td:last-child {
+table#upload td:last-child {
   vertical-align: top;
   width: calc(100% - 300px);
+}
+
+table#mapoptions {
+  max-width: 600px;
+}
+
+table#mapoptions th {
+  text-align: left;
+}
+
+#mappingoptions div {
+  margin: 0px 10px;
+}
+
+#degree {
+  margin-left: 20px;
+}
+
+#create {
+  font-size: 16px;
+  padding: 5px 10px;
+  margin: auto;
 }
 
 label {
@@ -30,4 +52,9 @@ textarea {
   width: 100%;
   resize: vertical;
   min-height: 70px;
+}
+
+input[type="number"] {
+  width: 50px;
+  margin-right: 5px;
 }
