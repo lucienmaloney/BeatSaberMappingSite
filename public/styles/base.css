@@ -1,0 +1,25 @@
+nav {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  font-family: sans-serif;
+}
+
+main {
+  display: flex;
+  align-items: stretch;
+  flex-direction: column;
+  font-family: sans-serif;
+  margin: 0px 10%;
+}
+
+nav > h2 {
+}
+
+nav a {
+  margin: 0px 10px;
+}
+
+main {
+  margin-top: 50px;
+}

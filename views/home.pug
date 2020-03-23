@@ -1,7 +1,32 @@
 extends base.pug
 
 block title
-  title Home Page
+  title Automapper
+
+block styles
+  link(rel="stylesheet", type="text/css" href="/styles/home.css")
 
 block main
-  h2 Here be home
+  fieldset
+    legend Step 1: Select Songs
+    table
+      tr
+        td
+          label Upload Files:
+        td
+          input(type="file", multiple)
+      tr
+        td
+          label and/or
+        td
+      tr
+        td
+          label Paste YouTube URL's:
+          br
+          label(class="small") Separate URL's by newlines; Playlist links allowed
+        td
+          textarea
+  fieldset
+    legend Step 2: Create Maps
+  fieldset
+    legend Step 3: Download Maps

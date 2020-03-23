@@ -1,0 +1,33 @@
+fieldset {
+  margin-bottom: 30px;
+  flex-grow: 1;
+}
+
+table, tr {
+  width: 100%;
+}
+
+td:first-child {
+  text-align: center;
+  width: 250px;
+}
+
+td:last-child {
+  vertical-align: top;
+  width: calc(100% - 300px);
+}
+
+label {
+  font-size: 16px;
+}
+
+label.small {
+  color: #555;
+  font-size: 14px;
+}
+
+textarea {
+  width: 100%;
+  resize: vertical;
+  min-height: 70px;
+}
