@@ -12,18 +12,18 @@ block main
     table#upload
       tr
         td
-          label Upload Files:
+          label Upload File(s):
         td
-          input(type="file", multiple)
+          input(type="file", multiple)#songupload
       tr
         td
           label and/or
         td
       tr
         td
-          label Paste YouTube URL's:
+          label Paste YouTube URL(s):
           br
-          label.small Separate URL's by newlines; Playlist links allowed
+          label.small Separate URLs by newlines; Playlist links allowed
         td
           textarea
   fieldset
@@ -130,9 +130,15 @@ block main
         label Expert+
         br
     hr
-    input(type="button", value="Create Maps")#create
+    input(type="button", value="Create Maps", onclick="createmaps()")
   fieldset
     legend Step 3: Download Maps
-    label Fetching songs
+    label Creating maps
     progress(value="68", max="100")
     br
+    input(type="button", value="Download Maps", disabled)
+
+block scripts
+  script(src="/scripts/data.js")
+  script(src="/scripts/builds/BeatSaber.js")
+  script(src="/scripts/home.js")

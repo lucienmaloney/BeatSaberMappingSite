@@ -9,7 +9,7 @@ table, tr {
 
 table#upload td:first-child {
   text-align: center;
-  width: 250px;
+  width: 240px;
 }
 
 table#upload td:last-child {
@@ -33,7 +33,7 @@ table#mapoptions th {
   margin-left: 20px;
 }
 
-#create {
+input[type="button"] {
   font-size: 16px;
   padding: 5px 10px;
   margin: auto;
