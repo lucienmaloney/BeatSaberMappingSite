@@ -20,11 +20,5 @@
     "express": "^4.17.1",
     "pug": "^2.0.4"
   },
-  "devDependencies": {
-    "@babel/core": "^7.9.0",
-    "@babel/preset-env": "^7.9.0",
-    "babel-preset-minify": "^0.5.1",
-    "gulp": "^4.0.2",
-    "gulp-babel": "^8.0.0"
-  }
+  "devDependencies": {}
 }
