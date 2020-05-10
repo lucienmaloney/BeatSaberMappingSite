@@ -31,7 +31,7 @@ function gettimestamps(data, samplerate) {
     count++;
     if (flux[i] > (sum / (bound * 2 + 1) * 1.4 + 0.05) && count > 5) {
       count = 0;
-      const time = 2 + (i * 256 / samplerate);
+      const time = 0 + (i * 256 / samplerate);
       notetimes.push(time);
     }
   }
