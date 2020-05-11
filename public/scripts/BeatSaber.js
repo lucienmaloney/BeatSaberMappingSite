@@ -22,7 +22,7 @@ function rolling(arr, l) {
   let x = arr.slice(0, l).reduce((a, b) => a + b, 0);
   for (let i = 0; i < arr.length; i++) {
     const b1 = (i - (l + 1)) >= 0 ? arr[i - (l + 1)] : 0;
-    const b2 = (i + 1) < arr.length ? arr[i + l] : 0;
+    const b2 = (i + l) < arr.length ? arr[i + l] : 0;
     x = x - b1 + b2;
     roll.push(x / (l * 2 + 1));
   }
@@ -37,9 +37,9 @@ function gettimestamps(data, samplerate) {
   let count = 16;
 
   for (let i = 1; i < flux.length - 1; i++) {
-    if (smoothflux[i] > smoothflux[i - 1] && smoothflux[i] > smoothflux[i + 1] && smoothflux[i] > (rollingavg[i] * 1.1 + 0.05) && count > 15) {
+    if (smoothflux[i] > smoothflux[i - 1] && smoothflux[i] > smoothflux[i + 1] && smoothflux[i] > (rollingavg[i] * 1.1 + 0.01) && count > 15) {
       count = 0;
-      const time = 0 + (i * 256 / samplerate);
+      const time = 2 + (i * 256 / samplerate);
       notetimes.push(time);
     } else {
       count++;

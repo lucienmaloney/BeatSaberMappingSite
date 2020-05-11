@@ -8,26 +8,11 @@ block styles
 
 block main
   fieldset
-    legend Step 1: Select Songs
-    table#upload
-      tr
-        td
-          label Upload File(s):
-        td
-          input(type="file", multiple)#songupload
-      tr
-        td
-          label and/or
-        td
-      tr
-        td
-          label Paste YouTube URL(s):
-          br
-          label.small Separate URL's by newlines Playlist links work too
-        td
-          textarea
-  fieldset
-    legend Step 2: Create Maps
+    legend BeatSaber.js
+    label Select File(s):
+    input(type="file", multiple)#songupload
+    input(type="button", value="Clear Song List", onclick="clearsongs()")#clear
+    hr
     table#mapoptions
       tr
         th Standard
@@ -128,15 +113,9 @@ block main
         br
         input(type="number", min="5", max="40", value="20")
         label Expert+
-        br
     hr
-    input(type="button", value="Create Maps", onclick="createmaps()")
-  fieldset
-    legend Step 3: Download Maps
-    label Creating maps
-    progress(value="68", max="100")
+    input(type="button", value="Create Maps", onclick="createmaps()")#mapinput
     br
-    input(type="button", value="Download Maps", disabled)
 
 block scripts
   script(src="/scripts/DSP.js")

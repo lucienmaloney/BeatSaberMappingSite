@@ -7,22 +7,13 @@ table, tr {
   width: 100%;
 }
 
-table#upload td:first-child {
-  text-align: center;
-  width: 240px;
-}
-
-table#upload td:last-child {
-  vertical-align: top;
-  width: calc(100% - 300px);
-}
-
 table#mapoptions {
   max-width: 600px;
 }
 
 table#mapoptions th {
   text-align: left;
+  font-style: normal;
 }
 
 #mappingoptions div {
@@ -33,14 +24,13 @@ table#mapoptions th {
   margin-left: 20px;
 }
 
-input[type="button"] {
-  font-size: 16px;
-  padding: 5px 10px;
-  margin: auto;
+#clear {
+  float: right;
 }
 
 label {
   font-size: 16px;
+  padding-right: 5px;
 }
 
 label.small {

@@ -1,21 +1,53 @@
 "use strict";
 
 const fileinput = document.getElementById("songupload");
-const reader = new FileReader();
-const audioctx = new AudioContext();
+const mapinput = document.getElementById("mapinput");
+let zip = null;
+let songcount = 0;
+let songthreshold = 100000;
 
-function createmaps() {
-  const file = fileinput.files[0];
+function downloadmaps() {
+  songcount++;
+  if (songcount == songthreshold) {
+    mapinput.value = `Preparing Download...`;
+    zip.generateAsync({type:"blob"}).then(function(content) {
+      saveas(content, `maps_${Date.now()}.zip`, "application/zip");
+      mapinput.value = "Create Maps";
+      mapinput.disabled = false;
+    });
+  } else {
+    mapinput.value = `Creating Maps... (${songcount} of ${songthreshold} done)`;
+    createmap(songcount);
+  }
+}
+
+function createmap(i) {
+  const reader = new FileReader();
+  const audioctx = new AudioContext();
+  const file = fileinput.files[i];
+  reader.addEventListener("loadend", function(event) {
+    let data = audioctx.decodeAudioData(event.target.result, buf => handlebuffer(buf, file.name));
+  });
   reader.readAsArrayBuffer(file);
 }
 
-reader.addEventListener("loadend", function(event) {
-  let data = audioctx.decodeAudioData(event.target.result, handlebuffer);
-});
+function createmaps() {
+  zip = new JSZip();
+  songcount = 0;
+  songthreshold = fileinput.files.length;
 
-function handlebuffer(buffer) {
-  console.log(buffer);
+  if (songthreshold > 0) {
+    mapinput.value = `Creating Maps... (0 of ${songthreshold} done)`;
+    mapinput.disabled = true;
+    createmap(0);
+  }
+}
 
+function clearsongs() {
+  fileinput.value = null;
+}
+
+function handlebuffer(buffer, filename) {
   const audio = buffer.getChannelData(0);
   const length = audio.length;
   for (let i = 1; i < buffer.numberOfChannels; i++) {
@@ -27,17 +59,16 @@ function handlebuffer(buffer) {
   const timestamps = gettimestamps(audio, buffer.sampleRate);
   const bmjson = createbeatmapJSON(timestamps);
 
-  encode(buffer, function(oggblob) {
-    const name = fileinput.files[0].name.replace(/\..*/, "");
+  buftoogg(buffer, function(oggblob) {
+    const name = filename.replace(/\..*/, "");
     infojson["_songName"] = name;
-    const zip = new JSZip();
-    zip.file("info.dat", JSON.stringify(infojson));
-    zip.file("ExpertPlus.dat", JSON.stringify(bmjson));
-    zip.file("song.ogg", oggblob);
 
-    zip.generateAsync({type:"blob"}).then(function(content) {
-      const randstring = Math.random().toString(36).substr(2);
-      saveas(content, `${randstring}_${name}.zip`, "application/zip");
-    });
+    const randstring = Math.random().toString(36).substr(2);
+    const dir = zip.folder(`${randstring}_${name}`);
+    dir.file("info.dat", JSON.stringify(infojson));
+    dir.file("ExpertPlus.dat", JSON.stringify(bmjson));
+    dir.file("song.ogg", oggblob);
+
+    downloadmaps();
   });
 }
