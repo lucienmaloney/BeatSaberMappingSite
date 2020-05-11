@@ -129,7 +129,7 @@ function timestonotes(notetimes) {
     timediff = newtime - t;
     if (timediff < 0.2) {
       pushnote(!prevcolor, newtime, timediff);
-    } else if (Math.random() < 0.2) {
+    } else if (Math.random() < 0.3) {
       pushnote(randbool(), newtime, timediff);
       pushnote(!prevcolor, newtime, timediff);
     } else {

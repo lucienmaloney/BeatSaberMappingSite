@@ -9,7 +9,7 @@ let songthreshold = 100000;
 function downloadmaps() {
   songcount++;
   if (songcount == songthreshold) {
-    mapinput.value = `Preparing Download...`;
+    mapinput.value = `Preparing Download... (May take a bit)`;
     zip.generateAsync({type:"blob"}).then(function(content) {
       saveas(content, `maps_${Date.now()}.zip`, "application/zip");
       mapinput.value = "Create Maps";
