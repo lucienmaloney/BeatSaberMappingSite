@@ -17,22 +17,32 @@ function getflux(data, samplerate) {
   return flux;
 }
 
+function rolling(arr, l) {
+  const roll = [];
+  let x = arr.slice(0, l).reduce((a, b) => a + b, 0);
+  for (let i = 0; i < arr.length; i++) {
+    const b1 = (i - (l + 1)) >= 0 ? arr[i - (l + 1)] : 0;
+    const b2 = (i + 1) < arr.length ? arr[i + l] : 0;
+    x = x - b1 + b2;
+    roll.push(x / (l * 2 + 1));
+  }
+  return roll;
+}
+
 function gettimestamps(data, samplerate) {
   const notetimes = [];
   const flux = getflux(data, samplerate);
-  const bound = 20;
-  let sum = flux.slice(0, bound).reduce((a, b) => a + b, 0);
-  let count = 5;
+  const smoothflux = rolling(flux, 5);
+  const rollingavg = rolling(flux, 40);
+  let count = 16;
 
-  for (let i = 0; i < flux.length; i++) {
-    const lower = i - (bound + 1) >= 0 ? flux[i - (bound + 1)] : 0;
-    const upper = i + bound < flux.length ? flux[i + bound] : 0;
-    sum = sum - lower + upper;
-    count++;
-    if (flux[i] > (sum / (bound * 2 + 1) * 1.4 + 0.05) && count > 5) {
+  for (let i = 1; i < flux.length - 1; i++) {
+    if (smoothflux[i] > smoothflux[i - 1] && smoothflux[i] > smoothflux[i + 1] && smoothflux[i] > (rollingavg[i] * 1.1 + 0.05) && count > 15) {
       count = 0;
       const time = 0 + (i * 256 / samplerate);
       notetimes.push(time);
+    } else {
+      count++;
     }
   }
   return notetimes;
