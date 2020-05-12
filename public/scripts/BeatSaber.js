@@ -1,34 +1,59 @@
 // JavaScript adaptation of https://github.com/lucienmaloney/BeatSaber.jl/blob/master/src/BeatSaber.jl
 
+/** getflux: return flux (average change in frequency over time) of some audio data
+ * @param  {Array{Float}} data
+ * @param  {Int}          samplerate
+ * @return {Array{Float}} flux
+ */
 function getflux(data, samplerate) {
   const fft = new FFT(2048, samplerate);
   const flux = [];
   let spectrum = new Float64Array(1024);
+  // Incrementing by 256 samples at a time means the 2048-long FFT's will have 87.5% overlap,
+  //   which is a lot, but is important for determing precise positions of where to place notes
   for (let i = 0; i < data.length - 2048; i += 256) {
     fft.forward(data.slice(i, i + 2048));
     let x = 0;
+    // An FFT of n samples will produce a frequency array (n / 2) numbers long, hence the loop to 1024, not 2048
     for (let j = 0; j < 1024; j++) {
+      // Calculate the sum of all increases in spectrum while ignoring all frequencies that diminish
+      // There are pluses and minuses to not tracking decreases in frequency in determining note placement,
+      //   but so far this is the best method I've come up with for maximum average accuracy
       const diff = fft.spectrum[j] - spectrum[j];
       x += diff > 0 ? diff : 0;
     }
     flux.push(x);
+    // Set old spectrum to current spectrum
+    // Slice it so it passes by value and not reference
     spectrum = fft.spectrum.slice(0, 1024);
   }
   return flux;
 }
 
+/** rolling: Get rolling average of array of numbers
+ * @param  {Array{Number}} arr
+ * @param  {Int}           l   : The radius of the range to average from
+ * @return {Array{Number}} roll
+ */
 function rolling(arr, l) {
   const roll = [];
   let x = arr.slice(0, l).reduce((a, b) => a + b, 0);
+  const rangelength = (l * 2 + 1);
+
   for (let i = 0; i < arr.length; i++) {
-    const b1 = (i - (l + 1)) >= 0 ? arr[i - (l + 1)] : 0;
-    const b2 = (i + l) < arr.length ? arr[i + l] : 0;
+    const b1 = (i - (l + 1)) >= 0 ? arr[i - (l + 1)] : 0; // Get the lower bound for subtraction
+    const b2 = (i + l) < arr.length ? arr[i + l] : 0;     // Get the upper bound for addition
     x = x - b1 + b2;
-    roll.push(x / (l * 2 + 1));
+    roll.push(x / rangelength); // Push new average
   }
   return roll;
 }
 
+/** gettimestamps: return an array of when to place notes
+ * @param  {Array{Number}} data
+ * @param  {Int}           samplerate
+ * @return {Array{Number}} notetimes
+ */
 function gettimestamps(data, samplerate) {
   const notetimes = [];
   const flux = getflux(data, samplerate);
@@ -39,7 +64,7 @@ function gettimestamps(data, samplerate) {
   for (let i = 1; i < flux.length - 1; i++) {
     if (smoothflux[i] > smoothflux[i - 1] && smoothflux[i] > smoothflux[i + 1] && smoothflux[i] > (rollingavg[i] * 1.1 + 0.05) && count > 15) {
       count = 0;
-      const time = 2 + (i * 256 / samplerate);
+      const time = 2 + (i * 256 / samplerate); // Add two seconds to time since whole song is delayed 2 seconds
       notetimes.push(time);
     } else {
       count++;
@@ -47,6 +72,9 @@ function gettimestamps(data, samplerate) {
   }
   return notetimes;
 }
+
+// The rest of the functions in this file are just JavaScript translations of the original Julia code
+// See here for more documentation: https://github.com/lucienmaloney/BeatSaber.jl/blob/master/src/BeatSaber.jl
 
 function getnotedata(note, color = 0) {
   const x = note % 4;
