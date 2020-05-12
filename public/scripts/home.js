@@ -2,24 +2,8 @@
 
 const fileinput = document.getElementById("songupload");
 const mapinput = document.getElementById("mapinput");
-let zip = null;
 let songcount = 0;
 let songthreshold = 100000;
-
-function downloadmaps() {
-  songcount++;
-  if (songcount == songthreshold) {
-    mapinput.value = `Preparing Download... (May take a bit)`;
-    zip.generateAsync({type:"blob"}).then(function(content) {
-      saveas(content, `maps_${Date.now()}.zip`, "application/zip");
-      mapinput.value = "Create Maps";
-      mapinput.disabled = false;
-    });
-  } else {
-    mapinput.value = `Creating Maps... (${songcount} of ${songthreshold} done)`;
-    createmap(songcount);
-  }
-}
 
 function createmap(i) {
   const reader = new FileReader();
@@ -32,7 +16,6 @@ function createmap(i) {
 }
 
 function createmaps() {
-  zip = new JSZip();
   songcount = 0;
   songthreshold = fileinput.files.length;
 
@@ -60,15 +43,25 @@ function handlebuffer(buffer, filename) {
   const bmjson = createbeatmapJSON(timestamps);
 
   buftoogg(buffer, function(oggblob) {
+    const zip = new JSZip();
     const name = filename.replace(/\..*/, "");
+    const randstring = Math.random().toString(36).substr(2);
     infojson["_songName"] = name;
 
-    const randstring = Math.random().toString(36).substr(2);
-    const dir = zip.folder(`${randstring}_${name}`);
-    dir.file("info.dat", JSON.stringify(infojson));
-    dir.file("Expert.dat", JSON.stringify(bmjson));
-    dir.file("song.ogg", oggblob);
+    zip.file("info.dat", JSON.stringify(infojson));
+    zip.file("Expert.dat", JSON.stringify(bmjson));
+    zip.file("song.ogg", oggblob);
 
-    downloadmaps();
+    zip.generateAsync({type: "blob"}).then(function(content) {
+      saveas(content, `${randstring}_${name}.zip`, "application/zip");
+      songcount++;
+      if (songcount === songthreshold) {
+        mapinput.value = "Create Maps";
+        mapinput.disabled = false;
+      } else {
+        mapinput.value = `Creating Maps... (${songcount} of ${songthreshold} done)`;
+        createmap(songcount);
+      }
+    });
   });
 }
