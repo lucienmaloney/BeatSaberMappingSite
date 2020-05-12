@@ -21,34 +21,19 @@ block main
         th 360-degree
       tr
         td
-          input(type="checkbox", checked)
+          input(type="checkbox", disabled)
           label Easy
           br
-          input(type="checkbox", checked)
+          input(type="checkbox", disabled)
           label Normal
           br
-          input(type="checkbox", checked)
+          input(type="checkbox", disabled)
           label Hard
           br
-          input(type="checkbox", checked)
+          input(type="checkbox", disabled, checked)
           label Expert
           br
-          input(type="checkbox", checked)
-          label Expert+
-        td
-          input(type="checkbox")
-          label Easy
-          br
-          input(type="checkbox")
-          label Normal
-          br
-          input(type="checkbox")
-          label Hard
-          br
-          input(type="checkbox")
-          label Expert
-          br
-          input(type="checkbox")
+          input(type="checkbox", disabled)
           label Expert+
         td
           input(type="checkbox", disabled)
@@ -80,39 +65,55 @@ block main
           br
           input(type="checkbox", disabled)
           label Expert+
-    label.small#degree 90° and 360° automapping still WIP; watch for updates
+        td
+          input(type="checkbox", disabled)
+          label Easy
+          br
+          input(type="checkbox", disabled)
+          label Normal
+          br
+          input(type="checkbox", disabled)
+          label Hard
+          br
+          input(type="checkbox", disabled)
+          label Expert
+          br
+          input(type="checkbox", disabled)
+          label Expert+
+    label.small#degree Automapper settings still WIP
     hr
     div.flex#mappingoptions
       div
         p Environment:
-        input(type="radio", name="environment", checked)
+        input(type="radio", name="environment", disabled, checked)
         label Default
         br
-        input(type="radio", name="environment")
+        input(type="radio", name="environment", disabled)
         label Big Mirror
         br
-        input(type="radio", name="environment")
+        input(type="radio", name="environment", disabled)
         label Nice
         br
-        input(type="radio", name="environment")
+        input(type="radio", name="environment", disabled)
         label Triangle
         br
       div
         p Note Speed:
-        input(type="number", min="5", max="40", value="10")
+        input(type="number", min="5", max="40", value="10", disabled)
         label Easy
         br
-        input(type="number", min="5", max="40", value="12")
+        input(type="number", min="5", max="40", value="12", disabled)
         label Normal
         br
-        input(type="number", min="5", max="40", value="15")
+        input(type="number", min="5", max="40", value="15", disabled)
         label Hard
         br
-        input(type="number", min="5", max="40", value="18")
+        input(type="number", min="5", max="40", value="18", disabled)
         label Expert
         br
-        input(type="number", min="5", max="40", value="20")
+        input(type="number", min="5", max="40", value="20", disabled)
         label Expert+
+    label.small#degree Automapper settings still WIP
     hr
     input(type="button", value="Create Maps", onclick="createmaps()")#mapinput
     br

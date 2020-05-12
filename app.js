@@ -11,6 +11,10 @@ app.get('/', function(req, res) {
   res.status(200).render('home');
 });
 
+app.get('/examples', function(req, res) {
+  res.status(200).render('example');
+});
+
 app.use('*', function(req, res) {
   res.status(404).render('404');
 });
