@@ -20,9 +20,9 @@ const infojson = {
       "_beatmapCharacteristicName": "Standard",
       "_difficultyBeatmaps": [
         {
-          "_difficulty": "ExpertPlus",
-          "_difficultyRank": 9,
-          "_beatmapFilename": "ExpertPlus.dat",
+          "_difficulty": "Expert",
+          "_difficultyRank": 7,
+          "_beatmapFilename": "Expert.dat",
           "_noteJumpMovementSpeed": 20,
           "_noteJumpStartBeatOffset": 0
         }

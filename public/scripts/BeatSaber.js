@@ -37,7 +37,7 @@ function gettimestamps(data, samplerate) {
   let count = 16;
 
   for (let i = 1; i < flux.length - 1; i++) {
-    if (smoothflux[i] > smoothflux[i - 1] && smoothflux[i] > smoothflux[i + 1] && smoothflux[i] > (rollingavg[i] * 1.1 + 0.01) && count > 15) {
+    if (smoothflux[i] > smoothflux[i - 1] && smoothflux[i] > smoothflux[i + 1] && smoothflux[i] > (rollingavg[i] * 1.1 + 0.05) && count > 15) {
       count = 0;
       const time = 2 + (i * 256 / samplerate);
       notetimes.push(time);

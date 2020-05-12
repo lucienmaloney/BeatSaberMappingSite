@@ -66,7 +66,7 @@ function handlebuffer(buffer, filename) {
     const randstring = Math.random().toString(36).substr(2);
     const dir = zip.folder(`${randstring}_${name}`);
     dir.file("info.dat", JSON.stringify(infojson));
-    dir.file("ExpertPlus.dat", JSON.stringify(bmjson));
+    dir.file("Expert.dat", JSON.stringify(bmjson));
     dir.file("song.ogg", oggblob);
 
     downloadmaps();
