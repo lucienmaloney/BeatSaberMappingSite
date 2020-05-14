@@ -4,6 +4,14 @@ block title
   title Setup Guide
 
 block styles
-  link(rel="stylesheet", type="text/css" href="/styles/setup.css")
+  link(rel="stylesheet", type="text/css" href="/styles/example.css")
 
 block main
+  p To get started with custom songs on the Quest, you first need BMBF set up. If you haven't done that already, I recommend the following excellent video tutorial, although there are others you can search for as well:
+  iframe(width="560",height="315",src="https://www.youtube.com/embed/ZxBpRCDLMgQ",frameborder="0",allowfullscreen,allow="encrypted-media; picture-in-picture")
+  hr
+  p Next, unzip the downloaded map files and then copy and paste them into the CustomSongs directory of the Quest, which can be found by going Quest Drive -&gt; Internal Shared Storage -&gt; BMBFData -&gt; CustomSongs. The Quest must be on and plugged into your computer for this step, and in some cases you may need to have SideQuest running.
+  p Finally, open up the BMBF app in the Quest and select the "Tools" tab from the top menu. Hitting "Reload Songs Folder" will process your new maps and allow you to Sync to Beat Saber and play. The BMBF Quest app is finicky at times and is prone to sometimes crashing when reloading, so you might need to try this last step more than once.
+  p To remove these manually added maps, you must delete the map folders from the CustomSongs directory, and then click the "Reset Assets" button of the Tools tab.
+  hr
+  p If you run into any issues during this process, feel free to post to #[a(href="https://github.com/lucienmaloney/BeatSaberMappingSite/issues") https://github.com/lucienmaloney/BeatSaberMappingSite/issues].
