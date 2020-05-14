@@ -15,6 +15,14 @@ app.get('/examples', function(req, res) {
   res.status(200).render('example');
 });
 
+app.get('/setup', function(req, res) {
+  res.status(200).render('setup');
+});
+
+app.get('/about', function(req, res) {
+  res.status(200).render('about');
+});
+
 app.use('*', function(req, res) {
   res.status(404).render('404');
 });

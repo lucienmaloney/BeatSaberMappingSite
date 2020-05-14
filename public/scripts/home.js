@@ -21,6 +21,10 @@ function createmaps() {
   if (songthreshold > 0) {
     mapinput.value = `Creating Maps... (0 of ${songthreshold} done)`;
     mapinput.disabled = true;
+    const speed = document.querySelector('input[name="speed"]').value;
+    const environment = document.querySelector('input[name="environment"]:checked').value;
+    infojson["_environmentName"] = environment;
+    infojson["_difficultyBeatmapSets"][0]["_difficultyBeatmaps"][0]["_noteJumpMovementSpeed"] = speed;
     createmap(0);
   }
 }
@@ -52,7 +56,7 @@ function handlebuffer(buffer, filename) {
     // Set up zip file structure
     // Should contain the ogg audio file, an info.dat json file, and the map json file(s)
     const zip = new JSZip();
-    const name = filename.replace(/\..*/, "");
+    const name = filename.replace(/\.[^\.]*$/, "").replace(/\./g, "");
     const randstring = Math.random().toString(36).substr(2);
     infojson["_songName"] = name;
 

@@ -13,109 +13,30 @@ block main
     input(type="file", multiple)#songupload
     input(type="button", value="Clear Song List", onclick="clearsongs()")#clear
     hr
-    table#mapoptions
-      tr
-        th Standard
-        th One-handed
-        th 90-degree
-        th 360-degree
-      tr
-        td
-          input(type="checkbox", disabled)
-          label Easy
-          br
-          input(type="checkbox", disabled)
-          label Normal
-          br
-          input(type="checkbox", disabled)
-          label Hard
-          br
-          input(type="checkbox", disabled, checked)
-          label Expert
-          br
-          input(type="checkbox", disabled)
-          label Expert+
-        td
-          input(type="checkbox", disabled)
-          label Easy
-          br
-          input(type="checkbox", disabled)
-          label Normal
-          br
-          input(type="checkbox", disabled)
-          label Hard
-          br
-          input(type="checkbox", disabled)
-          label Expert
-          br
-          input(type="checkbox", disabled)
-          label Expert+
-        td
-          input(type="checkbox", disabled)
-          label Easy
-          br
-          input(type="checkbox", disabled)
-          label Normal
-          br
-          input(type="checkbox", disabled)
-          label Hard
-          br
-          input(type="checkbox", disabled)
-          label Expert
-          br
-          input(type="checkbox", disabled)
-          label Expert+
-        td
-          input(type="checkbox", disabled)
-          label Easy
-          br
-          input(type="checkbox", disabled)
-          label Normal
-          br
-          input(type="checkbox", disabled)
-          label Hard
-          br
-          input(type="checkbox", disabled)
-          label Expert
-          br
-          input(type="checkbox", disabled)
-          label Expert+
-    label.small#degree Automapper settings still WIP
-    hr
     div.flex#mappingoptions
       div
+        p Note Speed:
+        input(type="number", name="speed", min="5", max="40", value="20")
+        label Expert
+      div
         p Environment:
-        input(type="radio", name="environment", disabled, checked)
+        input(type="radio", name="environment", value="DefaultEnvironment", checked)
         label Default
         br
-        input(type="radio", name="environment", disabled)
+        input(type="radio", name="environment", value="BigMirrorEnvironment")
         label Big Mirror
         br
-        input(type="radio", name="environment", disabled)
+        input(type="radio", name="environment", value="NiceEnvironment")
         label Nice
         br
-        input(type="radio", name="environment", disabled)
+        input(type="radio", name="environment", value="TriangleEnvironment")
         label Triangle
         br
-      div
-        p Note Speed:
-        input(type="number", min="5", max="40", value="10", disabled)
-        label Easy
+        input(type="radio", name="environment", value="Origins")
+        label Origins
         br
-        input(type="number", min="5", max="40", value="12", disabled)
-        label Normal
-        br
-        input(type="number", min="5", max="40", value="15", disabled)
-        label Hard
-        br
-        input(type="number", min="5", max="40", value="18", disabled)
-        label Expert
-        br
-        input(type="number", min="5", max="40", value="20", disabled)
-        label Expert+
-    label.small#degree Automapper settings still WIP
     hr
-    input(type="button", value="Create Maps", onclick="createmaps()")#mapinput
+    input(type="button", value="Create Maps", onclick="createmaps()", title="The map creation button: Tap it so you can beat it")#mapinput
     br
 
 block scripts
