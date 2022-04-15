@@ -4,8 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-	"build": "npm install --save && node ./app.js",
-	"start": "./app.js",
+    "start": "./app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -20,7 +19,8 @@
   "homepage": "https://github.com/lucienmaloney/BeatSaberMappingSite#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "pug": "^2.0.4"
-  },
-  "devDependencies": {}
+    "now": "^21.0.1",
+    "pug": "^2.0.4",
+    "vercel": "^24.1.0"
+  }
 }
