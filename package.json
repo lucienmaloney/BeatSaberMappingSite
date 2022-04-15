@@ -4,6 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
+	"build": "yarn install && ./app.js",
 	"start": "./app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
