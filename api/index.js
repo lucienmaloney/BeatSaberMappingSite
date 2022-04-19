@@ -1,6 +1,7 @@
 const express = require("express");
 const path = require("path");
 
+var arguments = process.argv;
 const app = express();
 
 // app.set("view engine", "pug");
@@ -37,7 +38,7 @@ app.use(function (err, req, res, next) {
   res.status(500).render("500");
 });
 
-app.listen(7001, () => console.log("Running on port 7001"));
+app.listen(arguments[2], () => console.log("Running on port ", arguments[2]));
 
 // Export the Express API
 module.exports = app;
