@@ -33,6 +33,3 @@ app.use(function (err, req, res, next) {
 });
 
 app.listen(7001, () => console.log("Running on port 7001"));
-
-// Export the Express API
-module.exports = app;
