@@ -19,8 +19,6 @@
   "homepage": "https://github.com/lucienmaloney/BeatSaberMappingSite#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "now": "^21.0.1",
-    "pug": "^2.0.4",
-    "vercel": "^24.1.0"
+    "pug": "^2.0.4" 
   }
 }
